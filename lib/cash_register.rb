@@ -1,19 +1,18 @@
 class CashRegister
 
-  attr_accessor :total, :discount, :items, :last_item_price
+  attr_accessor :total, :discount, :items, :last_transaction
 
   def initialize(discount=0)
     @total = 0
     @discount = discount
     @items = []
-    @last_item_price = nil
   end
 
   def add_item(title, price, quantity=1)
     self.total += (price * quantity)
     self.items << Array.new(quantity, title)
     self.items = self.items.flatten
-    self.last_item_price = (price * quantity)
+    self.last_transaction = (price * quantity)
   end
 
   def apply_discount
@@ -26,7 +25,7 @@ class CashRegister
   end
 
   def void_last_transaction
-    self.total -= self.last_item_price
+    self.total -= self.last_transaction
   end
 
 end
